@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Menu</title>
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS (loaded after Bootstrap to allow overrides) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <nav class="main-nav hidden">
+      <div class="nav-brand-group">
+        <button id="logoutBtn" class="btn btn-danger btn-sm" title="Logout">← Logout</button>
+        <a href="#home" class="nav-logo">Hotel Menu</a>
+      </div>
+      <div class="nav-actions">
+        <button class="hamburger-menu" id="hamburgerBtn" title="Toggle menu">☰</button>
+        <div class="nav-links">
+          <a href="#rooms">Rooms</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#staff">Staff</a>
+          <a href="#food">Food</a>
+          <a href="#services">Services</a>
+          <a href="#availability">Check</a>
+          <a href="#booking">Booking Summary</a>
+          <a href="#manage">Manage</a>
+          <a href="#add">Add</a>
+          <a href="#user-manager" class="admin-only">User Manager</a>
+        </div>
+      </div>
+      <!-- Mobile Navigation Menu -->
+      <div class="mobile-nav-menu" id="mobileNavMenu">
+        <a href="#rooms">Rooms</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#staff">Staff</a>
+        <a href="#food">Food</a>
+        <a href="#services">Services</a>
+        <a href="#availability">Check</a>
+        <a href="#booking">Booking Summary</a>
+        <a href="#manage">Manage</a>
+        <a href="#add">Add</a>
+        <a href="#user-manager" class="admin-only">User Manager</a>
+      </div>
+    </nav>
+
+    <section class="section page login-page" id="login">
+      <div class="section-header">
+        <p class="eyebrow">Admin Login</p>
+        <h2>Sign in before entering the hotel menu</h2>
+      </div>
+      <article class="admin-card login-card">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="loginId" class="form-label">ID</label>
+            <input type="text" id="loginId" class="form-control" autocomplete="username" required />
+          </div>
+          <div class="mb-3 password-field">
+            <label for="loginPassword" class="form-label">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="loginPassword" class="form-control" autocomplete="current-password" required />
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+          <div id="loginMessage" class="alert mt-3" role="alert" style="display:none;"></div>
+        </form>
+        <p class="login-switch">Don't have an account? <a href="#register">Register</a></p>
+      </article>
+    </section>
+
+    <section class="section page login-page" id="register">
+      <div class="section-header">
+        <p class="eyebrow">Register</p>
+        <h2>Create a hotel management account</h2>
+      </div>
+      <article class="admin-card login-card">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="registerId" class="form-label">ID</label>
+            <input type="text" id="registerId" class="form-control" autocomplete="username" required />
+          </div>
+          <div class="mb-3 password-field">
+            <label for="registerPassword" class="form-label">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="registerPassword" class="form-control" autocomplete="new-password" required />
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <div class="mb-3 password-field">
+            <label for="registerPasswordConfirm" class="form-label">Confirm Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="registerPasswordConfirm" class="form-control" autocomplete="new-password" required />
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Register</button>
+          <div id="registerMessage" class="alert mt-3" role="alert" style="display:none;"></div>
+        </form>
+        <p class="login-switch">Already have an account? <a href="#login">Login</a></p>
+      </article>
+    </section>
+
+    <section class="section page" id="home">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Welcome to your hotel</p>
+          <h1>Discover premium rooms, trusted reviews, and friendly staff.</h1>
+          <p class="hero-copy">Browse our curated hotel menu, check room availability, and plan the perfect stay with confidence.</p>
+          <div class="hero-actions">
+            <a href="#rooms" class="btn btn-primary hero-btn">Explore rooms</a>
+            <a href="#availability" class="btn btn-outline-light hero-btn">Check availability</a>
+          </div>
+          <div class="hero-badges">
+            <span>Best rate guaranteed</span>
+            <span>Easy booking</span>
+            <span>24/7 support</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-pill">Hotel Menu</div>
+          <div class="featured-carousel">
+            <div class="hero-image-card" id="featuredRoomCard"></div>
+            <div class="hero-slide-dots" id="featuredRoomDots"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>Quick hotel highlights</h2>
+        <ul>
+          <li>Comfortable rooms across 5 categories</li>
+          <li>Guest reviews with star ratings</li>
+          <li>Professional staff profiles</li>
+          <li>Fast availability checker</li>
+        </ul>
+      </div>
+      <div class="dashboard-grid" id="dashboardStats"></div>
+    </section>
+
+    <section class="section page rooms-page" id="rooms">
+      <div class="section-header">
+        <p class="eyebrow">Rooms</p>
+        <h2>Room menu</h2>
+      </div>
+      <div class="rooms-highlight">
+        <span class="highlight-badge">Featured Stay</span>
+        <div class="highlight-copy">
+          <h3>Deluxe King Suite</h3>
+          <p>Enjoy premium comfort, large windows, private balcony, and complimentary breakfast.</p>
+        </div>
+        <div class="highlight-meta">
+          <span>From $120 / night</span>
+          <span>Free breakfast & late checkout</span>
+        </div>
+      </div>
+      <div class="rooms-filter" id="roomsFilter"></div>
+      <div class="card-grid" id="roomsGrid"></div>
+    </section>
+
+    <section class="section page" id="reviews">
+      <div class="section-header">
+        <p class="eyebrow">Reviews</p>
+        <h2>Guest feedback</h2>
+      </div>
+      <div class="section-controls">
+        <label for="reviewSort">Sort by</label>
+        <select id="reviewSort">
+          <option value="newest">Newest</option>
+          <option value="highest">Highest rating</option>
+          <option value="author">Author</option>
+        </select>
+      </div>
+      <div class="review-grid" id="reviewsGrid"></div>
+    </section>
+
+    <section class="section page staff-page" id="staff">
+      <div class="section-header">
+        <p class="eyebrow">Staff</p>
+        <h2>Meet the team</h2>
+      </div>
+      <div class="staff-grid" id="staffGrid"></div>
+    </section>
+
+    <section class="section page food-page" id="food">
+      <div class="section-header">
+        <p class="eyebrow">Food & Drink</p>
+        <h2>Menu</h2>
+      </div>
+      <div id="foodGrid" class="food-grid"></div>
+    </section>
+
+    <section class="section page services-page" id="services">
+      <div class="section-header">
+        <p class="eyebrow">Services</p>
+        <h2>Room services</h2>
+      </div>
+      <div id="serviceAccessGate" class="form-panel">
+        <form id="serviceAccessForm">
+          <div class="field-group">
+            <label for="serviceGuestId">Enter your Guest ID to access services</label>
+            <input type="text" id="serviceGuestId" placeholder="Enter your Guest ID" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Access Services</button>
+          <p id="serviceAccessMessage" class="form-message"></p>
+        </form>
+      </div>
+      <div id="serviceContent" class="hidden">
+        <div class="card-grid service-grid" id="serviceGrid"></div>
+        <button id="serviceLogoutBtn" class="small-button" style="margin-top: 20px;">Exit Services</button>
+      </div>
+    </section>
+
+    <section class="section page" id="availability">
+      <div class="section-header">
+        <p class="eyebrow">Book</p>
+        <h2>Check availability</h2>
+      </div>
+      <div class="form-panel">
+        <form id="hotelForm">
+          <div class="field-group">
+            <label for="guestName">Guest Name</label>
+            <input type="text" id="guestName" required />
+          </div>
+          <div class="field-group">
+            <label for="guestId">Guest ID</label>
+            <input type="text" id="guestId" required />
+          </div>
+          <div class="field-group">
+            <label for="checkin">Check-in Date</label>
+            <input type="date" id="checkin" required />
+          </div>
+          <div class="field-group">
+            <label for="checkout">Check-out Date</label>
+            <input type="date" id="checkout" required />
+          </div>
+          <div class="field-group horizontal">
+            <div>
+              <label for="guests">Guests</label>
+              <input type="number" id="guests" min="1" value="1" required />
+            </div>
+            <div>
+              <label for="roomId">Room ID</label>
+              <input type="text" id="roomId" placeholder="1-5" required />
+            </div>
+            <div>
+              <label for="roomType">Room Type</label>
+              <select id="roomType"></select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Check Availability</button>
+        </form>
+
+        <section id="result" class="result hidden">
+          <h2>Search Result</h2>
+          <p id="resultText"></p>
+          <div id="bookingDetails" class="booking-details hidden">
+            <h3>Order details</h3>
+            <ul>
+              <li><strong>Guest Name:</strong> <span id="detailGuestName"></span></li>
+              <li><strong>Guest ID:</strong> <span id="detailGuestId"></span></li>
+              <li><strong>Room ID:</strong> <span id="detailRoomId"></span></li>
+              <li><strong>Room:</strong> <span id="detailRoom"></span></li>
+              <li><strong>Check-in:</strong> <span id="detailCheckin"></span></li>
+              <li><strong>Check-out:</strong> <span id="detailCheckout"></span></li>
+              <li><strong>Guests:</strong> <span id="detailGuests"></span></li>
+              <li><strong>Nights:</strong> <span id="detailNights"></span></li>
+              <li><strong>Total:</strong> <span id="detailTotal"></span></li>
+            </ul>
+            <button id="confirmBooking" type="button" class="btn btn-success mt-3">Confirm Booking</button>
+            <div id="confirmMessage" class="alert mt-2" role="alert" style="display:none;\"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section page" id="booking">
+      <div class="section-header">
+        <p class="eyebrow">Booking</p>
+        <h2>Booking Summary</h2>
+      </div>
+      <div class="dashboard-grid" id="bookingOverview"></div>
+      <div class="admin-panels">
+        <article class="admin-card">
+          <h3>Confirmed Bookings</h3>
+          <div id="bookingList" class="booking-list"></div>
+          <p id="bookingMessage" class="form-message"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="manage">
+      <div class="section-header">
+        <p class="eyebrow">Manage</p>
+        <h2>Review, Staff, Food, and Service Manager</h2>
+      </div>
+      <div class="admin-panels">
+        <article class="admin-card">
+          <h3>Review Manager</h3>
+          <div id="reviewManageList" class="manage-list"></div>
+          <p id="reviewManageMessage" class="form-message"></p>
+        </article>
+
+        <article class="admin-card">
+          <h3>Staff Manager</h3>
+          <div id="staffManageList" class="manage-list"></div>
+          <p id="staffManageMessage" class="form-message"></p>
+        </article>
+
+        <article class="admin-card">
+          <h3>Food Manager</h3>
+          <div id="foodManageList" class="manage-list"></div>
+          <p id="foodManageMessage" class="form-message"></p>
+        </article>
+
+        <article class="admin-card">
+          <h3>Service Manager</h3>
+          <div id="serviceManageList" class="manage-list"></div>
+          <p id="serviceManageMessage" class="form-message"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="user-manager">
+      <div class="section-header">
+        <p class="eyebrow">User Manager</p>
+        <h2>Admin user accounts</h2>
+      </div>
+      <div class="admin-panels">
+        <article class="admin-card">
+          <div id="userManagerList" class="manage-list"></div>
+          <p id="userManagerMessage" class="form-message"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="add">
+      <div class="section-header">
+        <p class="eyebrow">Add</p>
+        <h2>Create Review, Staff, or Service</h2>
+      </div>
+      <div class="admin-panels">
+        <article class="admin-card">
+          <h3>Add Review</h3>
+          <form id="reviewForm">
+            <div class="field-group">
+              <label for="reviewAuthor">Name</label>
+              <input type="text" id="reviewAuthor" required />
+            </div>
+            <div class="field-group">
+              <label for="reviewTitle">Title</label>
+              <input type="text" id="reviewTitle" required />
+            </div>
+            <div class="field-group">
+              <label for="reviewStars">Stars</label>
+              <select id="reviewStars">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="reviewMessage">Message</label>
+              <textarea id="reviewMessageInput" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Review</button>
+            <p id="reviewMessage" class="form-message"></p>
+          </form>
+        </article>
+
+        <article class="admin-card">
+          <h3>Add Staff</h3>
+          <form id="staffForm">
+            <div class="field-group">
+              <label for="staffName">Name</label>
+              <input type="text" id="staffName" required />
+            </div>
+            <div class="field-group">
+              <label for="staffRole">Role</label>
+              <input type="text" id="staffRole" required />
+            </div>
+            <div class="field-group">
+              <label for="staffStatus">Status</label>
+              <select id="staffStatus" required>
+                <option value="Available">Available</option>
+                <option value="On Duty">On Duty</option>
+                <option value="On Break">On Break</option>
+                <option value="Training">Training</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success">Save Staff</button>
+            <p id="staffMessage" class="form-message"></p>
+          </form>
+        </article>
+
+        <article class="admin-card">
+          <h3>Add Service</h3>
+          <form id="serviceForm">
+            <div class="field-group">
+              <label for="serviceName">Service Name</label>
+              <input type="text" id="serviceName" required />
+            </div>
+            <div class="field-group">
+              <label for="serviceDescription">Description</label>
+              <textarea id="serviceDescription" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Service</button>
+            <p id="serviceMessage" class="form-message"></p>
+          </form>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bootstrap 5 JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

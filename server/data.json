@@ -1,0 +1,228 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "title": "Standard Room",
+      "description": "Cozy and bright room with a queen bed, free wifi, and city views.",
+      "price": 110,
+      "capacity": 2,
+      "slug": "standard",
+      "image": "images/Standard Room.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Deluxe Room",
+      "description": "Spacious room with premium amenities, minibar, and workspace.",
+      "price": 160,
+      "capacity": 3,
+      "slug": "deluxe",
+      "image": "images/Deluxe Room.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Suite",
+      "description": "Large luxury suite with living area, balcony, and exclusive service.",
+      "price": 210,
+      "capacity": 4,
+      "slug": "suite",
+      "image": "images/Suite.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Family Room",
+      "description": "Comfortable family room with two double beds, a seating area, and child-friendly amenities.",
+      "price": 180,
+      "capacity": 5,
+      "slug": "family",
+      "image": "images/Family Room.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Penthouse",
+      "description": "Luxury penthouse with panoramic city views, private terrace, and premium concierge service.",
+      "price": 320,
+      "capacity": 4,
+      "slug": "penthouse",
+      "image": "images/Penthouse.jpg"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "stars": 5,
+      "title": "Great stays",
+      "message": "The room was clean, the staff were very kind, and breakfast was excellent.",
+      "author": "Annas"
+    },
+    {
+      "id": 2,
+      "stars": 4,
+      "title": "Lovely location",
+      "message": "Perfect spot for visiting the city. Quiet and comfortable, with helpful service.",
+      "author": "Marcus",
+      "createdAt": "2026-05-12T14:45:00.000Z"
+    },
+    {
+      "id": 3,
+      "stars": 4,
+      "title": "Fantastic staff",
+      "message": "The reception team made our stay effortless. They recommended great local places.",
+      "author": "Lily",
+      "createdAt": "2026-05-15T11:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "stars": 5,
+      "title": "Very comfy stay",
+      "message": "Clean room, nice staff, and the breakfast was delicious.",
+      "author": "Tom",
+      "createdAt": "2026-05-18T09:10:00.000Z"
+    },
+    {
+      "id": 5,
+      "stars": 4,
+      "title": "Easy check-in",
+      "message": "Check-in was quick, and the room felt fresh and modern. Great for a business trip.",
+      "author": "Sofia",
+      "createdAt": "2026-05-20T16:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "stars": 5,
+      "title": "Perfect weekend stay",
+      "message": "The rooftop breakfast and friendly staff made our weekend special. Highly recommend.",
+      "author": "Noah",
+      "createdAt": "2026-05-22T13:45:00.000Z"
+    },
+    {
+      "id": 7,
+      "stars": 5,
+      "title": "Excellent Stay",
+      "message": "The hotel was amazing! Great service and beautiful rooms.",
+      "author": "Alice Johnson",
+      "createdAt": "2026-05-28T15:44:52.829Z"
+    }
+  ],
+  "staff": [
+    {
+      "id": 1,
+      "name": "Avery Lee",
+      "role": "CEO",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Ethan Park",
+      "role": "Guest Services",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Sophia Kim",
+      "role": "Concierge",
+      "status": "On Break"
+    },
+    {
+      "id": 4,
+      "name": "Mia Nguyen",
+      "role": "Receptionist",
+      "status": "Available"
+    },
+    {
+      "id": 5,
+      "name": "Daniel Carter",
+      "role": "Housekeeping Supervisor",
+      "status": "On Duty"
+    },
+    {
+      "id": 6,
+      "name": "Priya Shah",
+      "role": "Food & Beverage Coordinator",
+      "status": "On Duty"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "Gym Access",
+      "category": "Gym",
+      "description": "24/7 fitness center with cardio equipment, weights, and personal training options."
+    },
+    {
+      "id": 2,
+      "name": "Library Lounge",
+      "category": "Library",
+      "description": "Quiet reading room with books, magazines, and board games for guests."
+    },
+    {
+      "id": 3,
+      "name": "Arcade Zone",
+      "category": "Arcade",
+      "description": "Video games, racing simulators, and family-friendly entertainment."
+    },
+    {
+      "id": 4,
+      "name": "Spa Treatments",
+      "category": "Spa",
+      "description": "Relaxing massage and wellness services available by appointment."
+    }
+  ],
+  "bookings": [
+    {
+      "id": 2,
+      "roomName": "Standard Room",
+      "roomType": "standard",
+      "roomId": 3,
+      "guestName": "John Test",
+      "guestId": "GUEST001",
+      "checkin": "2024-12-20",
+      "checkout": "2024-12-22",
+      "guests": 1,
+      "nights": 2,
+      "totalCost": 220,
+      "createdAt": "2026-05-28T10:38:48.569Z"
+    },
+    {
+      "id": 3,
+      "roomName": "Penthouse",
+      "roomType": "penthouse",
+      "roomId": 3,
+      "guestName": "Billow",
+      "guestId": "P75",
+      "checkin": "2026-05-01",
+      "checkout": "2026-05-07",
+      "guests": 3,
+      "nights": 6,
+      "totalCost": 1920,
+      "createdAt": "2026-05-30T16:47:27.748Z"
+    },
+    {
+      "id": 4,
+      "roomName": "Family Room",
+      "roomType": "family",
+      "roomId": 4,
+      "guestName": "Alice",
+      "guestId": "F57",
+      "checkin": "2026-05-01",
+      "checkout": "2026-05-07",
+      "guests": 2,
+      "nights": 6,
+      "totalCost": 1080,
+      "createdAt": "2026-05-31T07:40:38.155Z"
+    },
+    {
+      "id": 5,
+      "roomName": "Family Room",
+      "roomType": "family",
+      "roomId": 3,
+      "guestName": "Flo",
+      "guestId": "F87",
+      "checkin": "2026-05-31",
+      "checkout": "2026-06-07",
+      "guests": 3,
+      "nights": 7,
+      "totalCost": 1260,
+      "createdAt": "2026-05-31T07:47:31.414Z"
+    }
+  ]
+}

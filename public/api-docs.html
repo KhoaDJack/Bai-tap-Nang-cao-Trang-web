@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel API Documentation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    nav {
+      background: #f8f9fa;
+      border-bottom: 1px solid #ddd;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    nav li {
+      border-right: 1px solid #ddd;
+    }
+    nav li:last-child {
+      border-right: none;
+    }
+    nav a {
+      display: block;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    nav a:hover {
+      background: #667eea;
+      color: white;
+    }
+    main {
+      padding: 40px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section {
+      margin-bottom: 50px;
+    }
+    .section h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+      font-size: 1.8em;
+    }
+    .endpoint {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+    .method {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: white;
+      font-size: 0.85em;
+      margin-right: 10px;
+    }
+    .method.get { background: #61affe; }
+    .method.post { background: #49cc90; }
+    .method.put { background: #fca130; }
+    .method.delete { background: #f93e3e; }
+    .endpoint h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .path {
+      background: #2d3748;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      font-size: 0.95em;
+    }
+    .params, .response {
+      margin: 15px 0;
+    }
+    .params h4, .response h4 {
+      color: #667eea;
+      font-size: 0.95em;
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #f0f0f0;
+      font-weight: bold;
+      color: #667eea;
+    }
+    tr:hover {
+      background: #f9f9f9;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin: 3px;
+    }
+    .badge.required { background: #fee; color: #c33; }
+    .badge.optional { background: #efe; color: #3c3; }
+    .status-good { color: #27ae60; font-weight: bold; }
+    .status-warning { color: #f39c12; font-weight: bold; }
+    .status-bad { color: #e74c3c; font-weight: bold; }
+    .code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    .footer {
+      background: #f8f9fa;
+      border-top: 1px solid #ddd;
+      padding: 30px;
+      text-align: center;
+      color: #666;
+    }
+    .assessment {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+    .assessment strong {
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏨 Hotel API Documentation</h1>
+      <p class="subtitle">RESTful API for Hotel Management System</p>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#staff">Staff</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#bookings">Bookings</a></li>
+        <li><a href="#assessment">Assessment</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="section" id="overview">
+        <h2>📋 API Overview</h2>
+        <p><strong>Base URL:</strong> <span class="code">http://localhost:3000/api</span></p>
+        <p><strong>Version:</strong> 1.0.0 (No versioning yet)</p>
+        <p><strong>Format:</strong> JSON</p>
+        <p><strong>Authentication:</strong> ⚠️ None (Security concern)</p>
+        
+        <div class="assessment">
+          <strong>⚠️ Current Status:</strong> Development/Demo only. Not production-ready.
+        </div>
+
+        <h3>Response Format</h3>
+        <div class="code" style="padding: 10px; background: #f4f4f4; border-radius: 6px;">
+{
+  "data": {...},
+  "error": "error message" (only if error)
+}
+        </div>
+
+        <h3>HTTP Status Codes</h3>
+        <table>
+          <tr>
+            <th>Code</th>
+            <th>Meaning</th>
+          </tr>
+          <tr>
+            <td>200</td>
+            <td>OK - Request succeeded</td>
+          </tr>
+          <tr>
+            <td>201</td>
+            <td>Created - Resource created successfully</td>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td>Bad Request - Invalid parameters</td>
+          </tr>
+          <tr>
+            <td>404</td>
+            <td>Not Found - Resource not found</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="section" id="rooms">
+        <h2>🏠 Rooms</h2>
+        
+        <div class="endpoint">
+          <h3><span class="method get">GET</span> Get All Rooms</h3>
+          <div class="path">GET /api/rooms</div>
+          <p>Retrieve a list of all available hotel rooms.</p>
+          <div class="response">
+            <h4>Response Example (200 OK)</h4>
+            <div class="code" style="padding: 10px; background: #f4f4f4; border-radius: 6px; overflow-x: auto;">
+[
+  {
+    "id": 1,
+    "title": "Standard Room",
+    "description": "Cozy and bright room with queen bed",
+    "price": 110,
+    "capacity": 2,
+    "slug": "standard"
+  }
+]
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="reviews">
+        <h2>⭐ Reviews</h2>
+        
+        <div class="endpoint">
+          <h3><span class="method get">GET</span> Get All Reviews</h3>
+          <div class="path">GET /api/reviews</div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method post">POST</span> Create Review</h3>
+          <div class="path">POST /api/reviews</div>
+          <div class="params">
+            <h4>Request Body</h4>
+            <table>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Example</th>
+              </tr>
+              <tr>
+                <td>stars</td>
+                <td>integer</td>
+                <td><span class="badge required">Required</span></td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+                <td>"Great Stay"</td>
+              </tr>
+              <tr>
+                <td>message</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+                <td>"Excellent service"</td>
+              </tr>
+              <tr>
+                <td>author</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+                <td>"John Doe"</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method put">PUT</span> Update Review</h3>
+          <div class="path">PUT /api/reviews/{id}</div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method delete">DELETE</span> Delete Review</h3>
+          <div class="path">DELETE /api/reviews/{id}</div>
+        </div>
+      </section>
+
+      <section class="section" id="staff">
+        <h2>👥 Staff</h2>
+        <p>Manage staff members (full CRUD operations available)</p>
+        <table>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/api/staff</td>
+            <td>List all staff</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/api/staff</td>
+            <td>Create new staff</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td>/api/staff/{id}</td>
+            <td>Update staff</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td>/api/staff/{id}</td>
+            <td>Delete staff</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="section" id="services">
+        <h2>🛎️ Services</h2>
+        <p>Manage hotel services (Room Service, Concierge, etc.)</p>
+        <table>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td>/api/services</td>
+            <td>List all services</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td>/api/services</td>
+            <td>Create new service (name + description only)</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td>/api/services/{id}</td>
+            <td>Update service</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td>/api/services/{id}</td>
+            <td>Delete service</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="section" id="bookings">
+        <h2>📅 Bookings</h2>
+        
+        <div class="endpoint">
+          <h3><span class="method get">GET</span> Get All Bookings</h3>
+          <div class="path">GET /api/bookings</div>
+          <p>Retrieve all hotel room bookings.</p>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method post">POST</span> Create Booking</h3>
+          <div class="path">POST /api/bookings</div>
+          <div class="params">
+            <h4>Request Body</h4>
+            <table>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td>roomName</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>roomType</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>roomId</td>
+                <td>integer</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>guestName</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>guestId</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>checkin</td>
+                <td>date</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>checkout</td>
+                <td>date</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>guests</td>
+                <td>integer</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>nights</td>
+                <td>integer</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>totalCost</td>
+                <td>number</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method post">POST</span> Check Availability</h3>
+          <div class="path">POST /api/availability</div>
+          <p>Check if a room type is available for given dates.</p>
+          <div class="params">
+            <h4>Request Body</h4>
+            <table>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td>checkin</td>
+                <td>date</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>checkout</td>
+                <td>date</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>guests</td>
+                <td>integer</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>roomId</td>
+                <td>integer (1-5)</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+              <tr>
+                <td>roomType</td>
+                <td>string</td>
+                <td><span class="badge required">Required</span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="response">
+            <h4>Response Example</h4>
+            <div class="code" style="padding: 10px; background: #f4f4f4; border-radius: 6px; overflow-x: auto;">
+{
+  "available": true,
+  "nights": 2,
+  "totalCost": 220,
+  "roomId": 1,
+  "roomName": "Standard Room",
+  "roomType": "standard",
+  "message": "Standard Room is available for 2 night(s)..."
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method put">PUT</span> Update Booking</h3>
+          <div class="path">PUT /api/bookings/{id}</div>
+        </div>
+
+        <div class="endpoint">
+          <h3><span class="method delete">DELETE</span> Delete Booking</h3>
+          <div class="path">DELETE /api/bookings/{id}</div>
+        </div>
+      </section>
+
+      <section class="section" id="assessment">
+        <h2>📊 Architecture Assessment</h2>
+        
+        <div class="assessment">
+          <strong>Overall Score: <span class="status-warning">5.6/10</span></strong>
+          <p>Status: ⚠️ ACCEPTABLE for development/demo, but NOT production-ready</p>
+        </div>
+
+        <h3>Strengths ✅</h3>
+        <ul style="margin-left: 20px;">
+          <li><strong>RESTful Design:</strong> Proper HTTP methods (GET, POST, PUT, DELETE)</li>
+          <li><strong>Consistent URL Patterns:</strong> /api/{resource}/{id} format</li>
+          <li><strong>Error Handling:</strong> Returns JSON errors with context</li>
+          <li><strong>6 Resource Modules:</strong> Rooms, Reviews, Staff, Services, Bookings, Availability</li>
+        </ul>
+
+        <h3>Weaknesses ⚠️</h3>
+        <ul style="margin-left: 20px;">
+          <li><strong class="status-bad">🔴 CRITICAL:</strong> No API Documentation (this file is manual)</li>
+          <li><strong class="status-bad">🔴 CRITICAL:</strong> No Authentication/Authorization</li>
+          <li><strong class="status-bad">🔴 CRITICAL:</strong> No Input Validation</li>
+          <li><strong class="status-warning">🟠 HIGH:</strong> No API Versioning (/api/v1/)</li>
+          <li><strong class="status-warning">🟠 HIGH:</strong> File-based persistence (not scalable)</li>
+          <li><strong class="status-warning">🟠 MEDIUM:</strong> No request logging</li>
+          <li>No test suite</li>
+          <li>No rate limiting</li>
+        </ul>
+
+        <h3>Recommendations</h3>
+        <ol style="margin-left: 20px;">
+          <li>✅ Install Swagger-UI for auto-generated docs</li>
+          <li>✅ Add JWT authentication</li>
+          <li>✅ Add input validation middleware</li>
+          <li>✅ Migrate to database (SQLite/MongoDB)</li>
+          <li>✅ Add API versioning</li>
+          <li>✅ Add unit tests</li>
+        </ol>
+      </section>
+    </main>
+
+    <div class="footer">
+      <p>Hotel API Documentation | Last Updated: May 28, 2024</p>
+      <p>For questions, contact: admin@hotel.local</p>
+    </div>
+  </div>
+</body>
+</html>
